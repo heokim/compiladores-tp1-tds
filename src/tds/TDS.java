@@ -45,6 +45,11 @@ public class TDS {
         LINEA++;
     }
 
+    /**
+     * Retorna el caractar en donde esta apuntado el puntero LINEA
+     * 
+     * @return caractar de la entrada en la posicion LINEA
+     */
     static char input() {
         if (LINEA < entrada.length()) {
             if(PRINT_INFO_LOGS) System.out.print(" " + entrada.charAt(LINEA));
@@ -56,11 +61,10 @@ public class TDS {
     }
 
     /**
-     * Metodo para imprimir mendaje de "Error de Sintaxis"
+     * Metodo para imprimir mensaje de "Error de Sintaxis" en la linea X
      */
     static void error() {
-        System.err.println("Error de Sintaxis en la linea " + LINEA 
-                + " sobre el caracter: '" + input() + "'");
+        System.err.println("Error de Sintaxis en la linea " + LINEA + " sobre el caracter: '" + input() + "'");
         System.exit(0);
     }
 
@@ -75,7 +79,6 @@ public class TDS {
             return "n: " + this.numero + ", c:" + this.contador;
         }
     }
-
 
     // Metodo Main del Traductor Dirigito por la Sintaxis
     public static void main(String[] args) {
@@ -114,21 +117,14 @@ public class TDS {
     static Valores LISTA() {
         Valores lista = new Valores();
         String numero1, numero2;
-        int contador;
 
-        if (input() == '0' || input() == '1' || input() == '2' || input() == '3' || input() == '4' ||
-                input() == '5' || input() == '6' || input() == '7' || input() == '8' || input() == '9') {
-            numero1 = PRECIO();
-            Valores r1 = R1();
-            numero2 = r1.numero;
-            contador = r1.contador;
-            lista.numero = String.valueOf(Integer.parseInt(numero1) + (numero2 != "" ? Integer.parseInt(numero2) : 0));
-            lista.contador = 1 + contador;
-            return lista;
-        } else {
-            error();
-            return null;
-        }
+        numero1 = PRECIO();
+        Valores r1 = R1();
+        numero2 = r1.numero;
+
+        lista.numero = String.valueOf(Integer.parseInt(numero1) + (numero2 != "" ? Integer.parseInt(numero2) : 0));
+        lista.contador = 1 + r1.contador;
+        return lista;
     }
 
     /*
@@ -163,16 +159,10 @@ public class TDS {
      */
     static String PRECIO() {
         String numero, numero1, numero2;
-        if (input() == '0' || input() == '1' || input() == '2' || input() == '3' || input() == '4' ||
-                input() == '5' || input() == '6' || input() == '7' || input() == '8' || input() == '9') {
-            numero1 = DIGITO();
-            numero2 = R2();
-            numero = numero1.concat(numero2);
-            return numero;
-        } else {
-            error();
-            return null;
-        }
+        numero1 = DIGITO();
+        numero2 = R2();
+        numero = numero1.concat(numero2);
+        return numero;
     }
 
     /*
@@ -184,8 +174,7 @@ public class TDS {
      */
     static String R2() {
         String numero;
-        if (input() == '0' || input() == '1' || input() == '2' || input() == '3' || input() == '4' ||
-                input() == '5' || input() == '6' || input() == '7' || input() == '8' || input() == '9') {
+        if (input() == '0' || input() == '1' || input() == '2' || input() == '3' || input() == '4' || input() == '5' || input() == '6' || input() == '7' || input() == '8' || input() == '9') {
             numero = PRECIO();
             return numero;
         } else {
